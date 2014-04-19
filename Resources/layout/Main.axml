@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#6fb269"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:minWidth="25px"
+        android:minHeight="25px" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btnByLocation"
+            android:layout_weight="1"
+            android:src="@drawable/Location"
+            android:adjustViewBounds="false"
+            android:background="#6fb269"
+            android:scaleType="fitCenter"
+            android:clickable="true" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btnCategory"
+            android:layout_weight="1"
+            android:background="#6fb269"
+            android:src="@drawable/Category"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:minWidth="25px"
+        android:minHeight="25px">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btnDate"
+            android:layout_weight="1"
+            android:background="#6fb269"
+            android:src="@drawable/ByDate"
+            android:scaleType="fitCenter" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btnAbout"
+            android:layout_weight="1"
+            android:background="#6fb269"
+            android:src="@drawable/About"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5" />
+</LinearLayout>
