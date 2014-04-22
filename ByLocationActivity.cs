@@ -1,29 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Reflection.Emit;
+using System.Linq;
 using System.ServiceModel;
 using Android.App;
+using Android.Content;
 using Android.OS;
-using Android.Support.V4.View;
 using Android.Support.V7.App;
-using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using Java.Interop;
-using Java.Text;
 
 namespace MyFestivalApp
 {
     [Activity(Label = "Search By Location", Theme = "@style/Theme.AppCompat.Light")]
-	public class ByLocationActivity : ActionBarActivity
+	public class ByLocationActivity : Activity/*, ListView.IOnItemClickListener*/
     {
-        private SearchView _searchView;
+		//private SearchView _searchView;
         private ListView _listView;
-        private ArrayAdapter _adapter;
+		//private ArrayAdapter _adapter;
         private DataTransferProcClient _client;
         private TextView _getCountiesTextView;
-        public static readonly EndpointAddress EndPoint = new EndpointAddress("http://192.168.1.1:3190/DataTransferProcClient.svc");
+		public static readonly EndpointAddress EndPoint = new EndpointAddress("http://10.0.2.2:3190/DataTransferProc.svc");
+		//public static readonly EndpointAddress EndPoint = new EndpointAddress("http://192.168.1.1:3190/DataTransferProc.svc");
 
         #region onCreate
         protected override void OnCreate(Bundle bundle)
@@ -35,7 +32,7 @@ namespace MyFestivalApp
 
             InitializeDataCounty();
 
-            //hard coded array
+            //hard coded array list of counties
             /*var counties = new[]
             {
                 "Antrim", "Armagh", "Carlow", "Cavan", "Clare", "Cork", "Donegal", "Down","Derry",
@@ -44,52 +41,30 @@ namespace MyFestivalApp
                 "Roscommon", "Sligo", "Tipp", "Tyrone", "Waterford", "Westmeath", "Wexford", "Wicklow"
             };*/
 
-            _listView = FindViewById<ListView>(Resource.Id.listView);
+			_listView = FindViewById<ListView>(Resource.Id.listView);
+			//_listView.OnItemClickListener = this;
+            _listView.FastScrollEnabled = true;
+
             //_adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, counties);
-            _listView.Adapter = _adapter;
+			//_listView.Adapter = _adapter;
 
             _getCountiesTextView = FindViewById<TextView>(Resource.Id.getCountiesTextView);
 
         }
-        #endregion
+		#endregion
 
-        #region Search List
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.search, menu);
-
-            var item = menu.FindItem(Resource.Id.action_search);
-            //var backbutton = menu.FindItem(Resource.Id.action_back);
-
-            var searchview = MenuItemCompat.GetActionView(item);
-            _searchView = searchview.JavaCast<SearchView>();
-
-            _searchView.QueryTextChange += (s, e) => _adapter.Filter.InvokeFilter(e.NewText);
-
-            _searchView.QueryTextSubmit += (s, e) =>
-            {
-                Toast.MakeText(this, "Search for: " + e.Query, ToastLength.Short).Show();
-                e.Handled = true;
-            };
-            return true;
-        }
-        #endregion
-
-
+        #region InitializeDataCounty
         private void InitializeDataCounty()
         {
             BasicHttpBinding binding = CreateBasicHttp();
             _client = new DataTransferProcClient(binding, EndPoint);
+			_client.GetCountiesDataCompleted += ClientOnDataTransferProcCompleted;
             _client.GetCountiesDataAsync();
-
-            var lstWebServiceMonoData = new List<GetCountiesDataCompletedEventArgs>();
-            
-            _client.GetCountiesDataCompleted += ClientOnDataTransferProcCompleted;
-
-            var mainListView = FindViewById<ListView>(Resource.Id.listView);
-	            mainListView.Adapter = new ArrayAdapter<string> (this, Android.Resource.Layout.SimpleListItem1);
+			//_client.Close ();
         }
+        #endregion
 
+        #region CreateBasicHttp
         private static BasicHttpBinding CreateBasicHttp()
         {
             var binding = new BasicHttpBinding()
@@ -110,24 +85,72 @@ namespace MyFestivalApp
             binding.ReceiveTimeout = timeout;
             return binding;
         }
+        #endregion
 
+        #region ClientOnDataTransferProcCompleted
+        //test connection to wcf, if doesn't work, you'll get an error
         private void ClientOnDataTransferProcCompleted(object sender, GetCountiesDataCompletedEventArgs getCountiesDataCompletedEventArgs)
         {
+
             string msg = null;
 
             if (getCountiesDataCompletedEventArgs.Error != null)
             {
                 msg = getCountiesDataCompletedEventArgs.Error.Message;
+				msg+= getCountiesDataCompletedEventArgs.Error.InnerException;
+				RunOnUiThread(() => _getCountiesTextView.Text = msg);
             }
             else if (getCountiesDataCompletedEventArgs.Cancelled)
             {
                 msg = "Request was cancelled.";
+				RunOnUiThread(() => _getCountiesTextView.Text = msg);
             }
             else
             {
                 msg = getCountiesDataCompletedEventArgs.Result.ToString();
+				TestAndroid.Festivalwrapper testHolder = getCountiesDataCompletedEventArgs.Result;
+				List<string> holder = testHolder.CountyList.Select(item => item.Name).ToList();
+
+                /*foreach (TestAndroid.CountyVM item in TestHolder.CountyList)
+				{
+					holder.Add (item.Name);
+				}*/
+
+				RunOnUiThread(() => _listView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, holder));
             }
-            RunOnUiThread(() => _getCountiesTextView.Text = msg);
+		}
+        #endregion
+
+        /*protected void OnListItemClick(ListView l, View v, int position, long id)
+        {
+           var t = holder[position];
+           Android.Widget.Toast.MakeText(this, t, Android.Widget.ToastLength.Short).Show();
         }
+		    var selectedvalue = _listView[position];
+			var Intent = new Intent(this, typeof(SelectLocationActivity));
+			Intent.PutExtra("{0}", selectedvalue);
+			StartActivity(Intent);*/
+
+        #region Search List
+		/*public override bool OnCreateOptionsMenu(IMenu menu)
+		{
+			MenuInflater.Inflate(Resource.Menu.search, menu);
+
+			var item = menu.FindItem(Resource.Id.action_search);
+			//var backbutton = menu.FindItem(Resource.Id.action_back);
+
+			var searchview = MenuItemCompat.GetActionView(item);
+			_searchView = searchview.JavaCast<SearchView>();
+
+			_searchView.QueryTextChange += (s, e) => _listView.Filter.InvokeFilter(e.NewText);
+
+			_searchView.QueryTextSubmit += (s, e) =>
+			{
+				Toast.MakeText(this, "Search for: " + e.Query, ToastLength.Short).Show();
+				e.Handled = true;
+			};
+			return true;
+		}*/
+		#endregion
     }
 }
