@@ -847,8 +847,8 @@ namespace MyFestivalApp
 			// aapt resource value: 0x7f050024
 			public const int action_mode_close_button = 2131034148;
 			
-			// aapt resource value: 0x7f05004a
-			public const int action_search = 2131034186;
+			// aapt resource value: 0x7f05004c
+			public const int action_search = 2131034188;
 			
 			// aapt resource value: 0x7f050025
 			public const int activity_chooser_view_content = 2131034149;
@@ -859,17 +859,20 @@ namespace MyFestivalApp
 			// aapt resource value: 0x7f050011
 			public const int beginning = 2131034129;
 			
-			// aapt resource value: 0x7f050049
-			public const int btnAbout = 2131034185;
-			
 			// aapt resource value: 0x7f050044
-			public const int btnByLocation = 2131034180;
+			public const int btnAbout = 2131034180;
 			
-			// aapt resource value: 0x7f050047
-			public const int btnCategory = 2131034183;
+			// aapt resource value: 0x7f05003c
+			public const int btnBack = 2131034172;
 			
-			// aapt resource value: 0x7f050048
-			public const int btnDate = 2131034184;
+			// aapt resource value: 0x7f050041
+			public const int btnByLocation = 2131034177;
+			
+			// aapt resource value: 0x7f050042
+			public const int btnCategory = 2131034178;
+			
+			// aapt resource value: 0x7f050043
+			public const int btnDate = 2131034179;
 			
 			// aapt resource value: 0x7f05002d
 			public const int checkbox = 2131034157;
@@ -895,8 +898,8 @@ namespace MyFestivalApp
 			// aapt resource value: 0x7f050013
 			public const int end = 2131034131;
 			
-			// aapt resource value: 0x7f050040
-			public const int endDate = 2131034176;
+			// aapt resource value: 0x7f050047
+			public const int endDate = 2131034183;
 			
 			// aapt resource value: 0x7f050026
 			public const int expand_activities_button = 2131034150;
@@ -904,14 +907,17 @@ namespace MyFestivalApp
 			// aapt resource value: 0x7f05002c
 			public const int expanded_menu = 2131034156;
 			
+			// aapt resource value: 0x7f05003f
+			public const int getCountiesTextView = 2131034175;
+			
 			// aapt resource value: 0x7f050045
-			public const int getCountiesTextView = 2131034181;
+			public const int getTextView = 2131034181;
 			
-			// aapt resource value: 0x7f05003e
-			public const int getTextView = 2131034174;
+			// aapt resource value: 0x7f05004a
+			public const int getTownsTextView = 2131034186;
 			
-			// aapt resource value: 0x7f05003c
-			public const int getTypeTextView = 2131034172;
+			// aapt resource value: 0x7f05003d
+			public const int getTypeTextView = 2131034173;
 			
 			// aapt resource value: 0x7f050014
 			public const int home = 2131034132;
@@ -931,14 +937,17 @@ namespace MyFestivalApp
 			// aapt resource value: 0x7f050001
 			public const int listMode = 2131034113;
 			
-			// aapt resource value: 0x7f050046
-			public const int listView = 2131034182;
+			// aapt resource value: 0x7f050040
+			public const int listView = 2131034176;
 			
 			// aapt resource value: 0x7f050029
 			public const int list_item = 2131034153;
 			
-			// aapt resource value: 0x7f05003d
-			public const int lvTypes = 2131034173;
+			// aapt resource value: 0x7f05004b
+			public const int lvTowns = 2131034187;
+			
+			// aapt resource value: 0x7f05003e
+			public const int lvTypes = 2131034174;
 			
 			// aapt resource value: 0x7f050012
 			public const int middle = 2131034130;
@@ -961,8 +970,8 @@ namespace MyFestivalApp
 			// aapt resource value: 0x7f05002f
 			public const int radio = 2131034159;
 			
-			// aapt resource value: 0x7f050043
-			public const int search = 2131034179;
+			// aapt resource value: 0x7f050049
+			public const int search = 2131034185;
 			
 			// aapt resource value: 0x7f050032
 			public const int search_badge = 2131034162;
@@ -1009,14 +1018,11 @@ namespace MyFestivalApp
 			// aapt resource value: 0x7f05001e
 			public const int split_action_bar = 2131034142;
 			
-			// aapt resource value: 0x7f050041
-			public const int spnLocation = 2131034177;
+			// aapt resource value: 0x7f050048
+			public const int spnLocation = 2131034184;
 			
-			// aapt resource value: 0x7f050042
-			public const int spnType = 2131034178;
-			
-			// aapt resource value: 0x7f05003f
-			public const int startDate = 2131034175;
+			// aapt resource value: 0x7f050046
+			public const int startDate = 2131034182;
 			
 			// aapt resource value: 0x7f050039
 			public const int submit_area = 2131034169;
@@ -1144,16 +1150,16 @@ namespace MyFestivalApp
 			public const int category = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int date = 2130903065;
+			public const int festival = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int festival = 2130903066;
+			public const int location = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int location = 2130903067;
+			public const int Main = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int Main = 2130903068;
+			public const int search = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
 			public const int selectLocation = 2130903069;

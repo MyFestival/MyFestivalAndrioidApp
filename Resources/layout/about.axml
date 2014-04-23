@@ -21,5 +21,15 @@
             android:text="@string/action_modes_content"
             android:textSize="16dip"
             android:textColor="#FFFFFF" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="122.0dp"
+            android:id="@+id/btnBack"
+            android:layout_weight="1"
+            android:src="@drawable/Backbutton"
+            android:adjustViewBounds="false"
+            android:background="#6fb269"
+            android:scaleType="fitCenter"
+            android:clickable="true" />
     </ScrollView>
 </LinearLayout>

@@ -23,7 +23,7 @@ namespace MyFestivalApp
 
             #region btnBack
 
-            _btnBack = FindViewById<ImageButton>(Resource.Id.btnByLocation);
+			_btnBack = FindViewById<ImageButton>(Resource.Id.btnBack);	
             _btnBack.Click += (sender, e) =>
             {
                 var back = new Intent(this, typeof(Activity1));

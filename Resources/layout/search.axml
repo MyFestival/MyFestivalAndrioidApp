@@ -2,17 +2,19 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="#6fb269">
-    <TextView
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/getTextView" />
+    android:orientation="vertical">
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
+        <TableRow
+            android:layout_marginTop="20dip">
+            <TextView
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/getTextView" />
+        </TableRow>
         <TableRow
             android:layout_marginTop="20dip">
             <TextView
@@ -54,20 +56,6 @@
                 android:id="@+id/spnLocation" />
         </TableRow>
         <TableRow
-            android:layout_marginTop="20dip">
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="Select Type :"
-                android:textSize="20sp"
-                android:textColor="#000000"
-                android:layout_marginLeft="20dip" />
-            <Spinner
-                android:layout_column="1"
-                android:id="@+id/spnType"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-        </TableRow>
-        <TableRow
             android:gravity="center"
             android:layout_marginTop="20dip">
             <Button
@@ -89,8 +77,8 @@
                 android:id="@+id/btnByLocation"
                 android:layout_weight="1"
                 android:src="@drawable/Backbutton"
+                android:background="@android:color/background_light"
                 android:adjustViewBounds="false"
-                android:background="#6fb269"
                 android:scaleType="fitCenter"
                 android:clickable="true" />
         </TableRow>

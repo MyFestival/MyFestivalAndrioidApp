@@ -70,9 +70,10 @@
     <Compile Include="AboutActivity.cs" />
     <Compile Include="Activity1.cs" />
     <Compile Include="DataTransferProc.cs" />
-    <Compile Include="DateActivity.cs" />
     <Compile Include="FestivalActivity.cs" />
+    <Compile Include="FestivalListActivity.cs" />
     <Compile Include="Models\MyFestival.cs" />
+    <Compile Include="SearchActivity.cs" />
     <Compile Include="SelectLocationActivity.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -86,15 +87,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\layout\festivallist.axml">
+      <SubType>AndroidResource</SubType>
+    </None>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\values\styles.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\category.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\date.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\about.axml">
@@ -110,6 +111,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\festival.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\search.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <None Include="Web References\localhost\CompositeType.datasource">

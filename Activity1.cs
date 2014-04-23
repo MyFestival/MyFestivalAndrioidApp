@@ -30,10 +30,10 @@ namespace MyFestivalApp
             _btnCategory.Click += GetCategoryButtonOnClick;
             #endregion
 
-            #region Date
-            _btnByDate = FindViewById<ImageButton>(Resource.Id.btnDate);
-			_btnByDate.Click += ByDateButtonOnClick;
-            #endregion
+			#region Date
+			_btnByDate = FindViewById<ImageButton>(Resource.Id.btnDate);
+			_btnByDate.Click += SearchOnClick;
+			#endregion
 
             #region About
             _btnAbout = FindViewById<ImageButton>(Resource.Id.btnAbout);
@@ -42,7 +42,7 @@ namespace MyFestivalApp
 
         }
 
-        #region County
+        #region County/Location Page
         private void GetCountiesButtonOnClick(object sender, EventArgs eventArgs)
         {
             //CountyVM data = new CountyVM();
@@ -51,7 +51,7 @@ namespace MyFestivalApp
         }
         #endregion
 
-        #region Category
+        #region Category Page
         private void GetCategoryButtonOnClick(object sender, EventArgs eventArgs)
         {
             var cat = new Intent(this, typeof(ByCategoryActivity));
@@ -59,17 +59,17 @@ namespace MyFestivalApp
         }
         #endregion
 
-        #region Date
-		private void ByDateButtonOnClick(object sender, EventArgs eventArgs)
+        #region Search Page
+        private void SearchOnClick(object sender, EventArgs eventArgs)
         {
-            var date = new Intent(this, typeof(DateActivity));
-            StartActivity(date);
+            var search = new Intent(this, typeof(SearchActivity));
+            StartActivity(search);
         }
         #endregion
 
         #region about
         private void GetAboutButtonOnClick(object sender, EventArgs eventArgs)
-		{ 
+        {
             var about = new Intent(this, typeof(AboutActivity));
             StartActivity(about);
         }

@@ -12,27 +12,23 @@ using Android.Widget;
 namespace MyFestivalApp
 {
     [Activity(Label = "Search By Location", Theme = "@style/Theme.AppCompat.Light")]
-	public class ByLocationActivity : Activity/*, ListView.IOnItemClickListener*/
-    {
+	public class ByLocationActivity : Activity//, ListView.IOnItemClickListener
+	{
 		//private SearchView _searchView;
         private ListView _listView;
 		//private ArrayAdapter _adapter;
         private DataTransferProcClient _client;
         private TextView _getCountiesTextView;
 		public static readonly EndpointAddress EndPoint = new EndpointAddress("http://10.0.2.2:3190/DataTransferProc.svc");
-		//public static readonly EndpointAddress EndPoint = new EndpointAddress("http://192.168.1.1:3190/DataTransferProc.svc");
 
         #region onCreate
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            // Load the UI defined in Location.axml
             SetContentView(Resource.Layout.location);
-
             InitializeDataCounty();
 
-            //hard coded array list of counties
+			#region hard coded array list of counties
             /*var counties = new[]
             {
                 "Antrim", "Armagh", "Carlow", "Cavan", "Clare", "Cork", "Donegal", "Down","Derry",
@@ -41,12 +37,13 @@ namespace MyFestivalApp
                 "Roscommon", "Sligo", "Tipp", "Tyrone", "Waterford", "Westmeath", "Wexford", "Wicklow"
             };*/
 
+			//_adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, counties);
+			//_listView.Adapter = _adapter;
+			#endregion
+
 			_listView = FindViewById<ListView>(Resource.Id.listView);
 			//_listView.OnItemClickListener = this;
             _listView.FastScrollEnabled = true;
-
-            //_adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, counties);
-			//_listView.Adapter = _adapter;
 
             _getCountiesTextView = FindViewById<TextView>(Resource.Id.getCountiesTextView);
 
@@ -91,7 +88,6 @@ namespace MyFestivalApp
         //test connection to wcf, if doesn't work, you'll get an error
         private void ClientOnDataTransferProcCompleted(object sender, GetCountiesDataCompletedEventArgs getCountiesDataCompletedEventArgs)
         {
-
             string msg = null;
 
             if (getCountiesDataCompletedEventArgs.Error != null)
@@ -121,36 +117,37 @@ namespace MyFestivalApp
 		}
         #endregion
 
-        /*protected void OnListItemClick(ListView l, View v, int position, long id)
-        {
-           var t = holder[position];
-           Android.Widget.Toast.MakeText(this, t, Android.Widget.ToastLength.Short).Show();
-        }
-		    var selectedvalue = _listView[position];
+		/*public void OnItemClick(AdapterView parent, View view, int position, long id)
+		{
+			//whatever you need it to do goes here.
+			//var t = holder[position];
+			//Android.Widget.Toast.MakeText(this, t, Android.Widget.ToastLength.Short).Show();
+			var selectedvalue = SimpleListItem1[parent];
 			var Intent = new Intent(this, typeof(SelectLocationActivity));
-			Intent.PutExtra("{0}", selectedvalue);
-			StartActivity(Intent);*/
+			Intent.PutExtra("{0}", selectedvalue.ToString());
+			StartActivity(Intent);
+		}*/
 
         #region Search List
-		/*public override bool OnCreateOptionsMenu(IMenu menu)
-		{
-			MenuInflater.Inflate(Resource.Menu.search, menu);
+		//public override bool OnCreateOptionsMenu(IMenu menu)
+		//{
+		//	MenuInflater.Inflate(Resource.Menu.search, menu);
 
-			var item = menu.FindItem(Resource.Id.action_search);
-			//var backbutton = menu.FindItem(Resource.Id.action_back);
+		//	var item = menu.FindItem(Resource.Id.action_search);
+		//	var backbutton = menu.FindItem(Resource.Id.action_back);
 
-			var searchview = MenuItemCompat.GetActionView(item);
-			_searchView = searchview.JavaCast<SearchView>();
+		//	var searchview = MenuItemCompat.GetActionView(item);
+		//	_searchView = searchview.JavaCast<SearchView>();
 
-			_searchView.QueryTextChange += (s, e) => _listView.Filter.InvokeFilter(e.NewText);
+		//	_searchView.QueryTextChange += (s, e) => _listView.Filter.InvokeFilter(e.NewText);
 
-			_searchView.QueryTextSubmit += (s, e) =>
-			{
-				Toast.MakeText(this, "Search for: " + e.Query, ToastLength.Short).Show();
-				e.Handled = true;
-			};
-			return true;
-		}*/
+		//	_searchView.QueryTextSubmit += (s, e) =>
+		//	{
+		//		Toast.MakeText(this, "Search for: " + e.Query, ToastLength.Short).Show();
+		//		e.Handled = true;
+		//	};
+		//	return true;
+		/*}*/
 		#endregion
     }
 }
