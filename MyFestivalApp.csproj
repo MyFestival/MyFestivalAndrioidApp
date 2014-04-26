@@ -72,7 +72,6 @@
     <Compile Include="DataTransferProc.cs" />
     <Compile Include="FestivalActivity.cs" />
     <Compile Include="FestivalListActivity.cs" />
-    <Compile Include="Models\MyFestival.cs" />
     <Compile Include="SearchActivity.cs" />
     <Compile Include="SelectLocationActivity.cs" />
     <Compile Include="SplashActivity.cs" />
@@ -85,11 +84,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="DataWcf.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\layout\festivallist.axml">
-      <SubType>AndroidResource</SubType>
-    </None>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\values\styles.xml">
@@ -114,6 +111,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\search.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\festivallist.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <None Include="Web References\localhost\CompositeType.datasource">

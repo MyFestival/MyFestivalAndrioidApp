@@ -12,7 +12,7 @@ using Android.Widget;
 namespace MyFestivalApp
 {
     [Activity(Label = "Search By Location", Theme = "@style/Theme.AppCompat.Light")]
-	public class ByLocationActivity : Activity//, ListView.IOnItemClickListener
+	public class ByLocationActivity : Activity, ListView.IOnItemClickListener
 	{
 		//private SearchView _searchView;
         private ListView _listView;
@@ -42,7 +42,7 @@ namespace MyFestivalApp
 			#endregion
 
 			_listView = FindViewById<ListView>(Resource.Id.listView);
-			//_listView.OnItemClickListener = this;
+			_listView.OnItemClickListener = this;
             _listView.FastScrollEnabled = true;
 
             _getCountiesTextView = FindViewById<TextView>(Resource.Id.getCountiesTextView);
@@ -117,17 +117,16 @@ namespace MyFestivalApp
 		}
         #endregion
 
-		/*public void OnItemClick(AdapterView parent, View view, int position, long id)
+		public void OnItemClick(AdapterView parent, View view, int position, long id)
 		{
-			//whatever you need it to do goes here.
-			//var t = holder[position];
-			//Android.Widget.Toast.MakeText(this, t, Android.Widget.ToastLength.Short).Show();
-			var selectedvalue = SimpleListItem1[parent];
+			var selectedValue = parent.GetItemIdAtPosition(position);
+			//InitializeDataTownById(int position);
 			var Intent = new Intent(this, typeof(SelectLocationActivity));
-			Intent.PutExtra("{0}", selectedvalue.ToString());
+            // selectedValue should already be a string but...
+            Intent.PutExtra("Name", selectedValue.ToString());
 			StartActivity(Intent);
-		}*/
-
+		}
+			
         #region Search List
 		//public override bool OnCreateOptionsMenu(IMenu menu)
 		//{

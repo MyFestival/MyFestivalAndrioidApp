@@ -6,12 +6,12 @@ using Android.Widget;
 
 namespace MyFestivalApp
 {
-    [Activity(Label = "Selected County", Theme = "@style/Theme.AppCompat.Light")]
+    [Activity(Label = "S", Theme = "@style/Theme.AppCompat.Light")]
     public class FestivalListActivity : Activity
     {
-        private DataTransferProcClient _client;
-        TextView _getTownsTextView;
-        ListView _listView;
+		//private DataTransferProcClient _client;
+		//TextView _getFestivalTextView;
+		//ListView _listView;
         public static readonly EndpointAddress EndPoint = new EndpointAddress("http://10.0.2.2:3190/DataTransferProc.svc");
 
         //private ShareActionProvider actionProvider;

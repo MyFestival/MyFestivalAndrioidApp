@@ -6,6 +6,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.Locations;
 using Android.OS;
 using Android.Runtime;
@@ -14,7 +15,7 @@ using Android.Widget;
 
 namespace MyFestivalApp
 {
-	[Activity(Label = "Selected County", Theme = "@style/Theme.AppCompat.Light")]
+	[Activity(Theme = "@style/Theme.AppCompat.Light")]
     public class SelectLocationActivity : Activity
     {
 		private DataTransferProcClient _client;
@@ -24,8 +25,10 @@ namespace MyFestivalApp
 
         protected override void OnCreate(Bundle bundle)
         {
-            base.OnCreate(bundle);
-            SetContentView(Resource.Layout.selectLocation);
+			var name = Intent.GetStringExtra("Name");
+
+			base.OnCreate(bundle);
+			SetContentView(Resource.Layout.selectLocation);
 			InitializeDataTown();
 
             _listView = FindViewById<ListView>(Resource.Id.lvTowns);
