@@ -10,7 +10,7 @@ using TestAndroid;
 namespace MyFestivalApp
 {
     //[Activity(Label = "\t\t\t\t\t\tHome", Theme = "@style/Theme.AppCompat.Light")]
-    [Activity(Label = "MyFestival", MainLauncher = true, Theme = "@style/Theme.AppCompat.Light")]
+	[Activity(Label = "Home", Theme = "@style/Theme.AppCompat.Light")]
     public class Activity1 : Activity
     {
         private ImageButton _btnLocation, _btnCategory, _btnByDate, _btnAbout;

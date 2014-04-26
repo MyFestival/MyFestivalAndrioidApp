@@ -26,10 +26,11 @@ namespace MyFestivalApp
         protected override void OnCreate(Bundle bundle)
         {
 			var name = Intent.GetStringExtra("Name");
+			var id = Intent.GetStringExtra ("position");
 
 			base.OnCreate(bundle);
 			SetContentView(Resource.Layout.selectLocation);
-			InitializeDataTown();
+			InitializeDataTownById(int id);
 
             _listView = FindViewById<ListView>(Resource.Id.lvTowns);
             //_listView.OnItemClickListener = this;
@@ -39,12 +40,12 @@ namespace MyFestivalApp
         }
 
 		#region InitializeDataTown
-		private void InitializeDataTown()
+		private void InitializeDataTownById(int id)
 		{
 			BasicHttpBinding binding = CreateBasicHttp();
 			_client = new DataTransferProcClient(binding, EndPoint);
-			_client.GetCountiesDataCompleted += ClientOnDataTransferProcCompleted;
-			_client.GetCountiesDataAsync();
+			_client.GetTownDataByCountyCompleted += ClientOnDataTransferProcCompleted;
+			_client.GetTownDataByCountyAsync();
 			//_client.Close ();
 		}
 		#endregion
@@ -74,26 +75,26 @@ namespace MyFestivalApp
 
         #region ClientOnDataTransferProcCompleted
         //test connection to wcf, if doesn't work, you'll get an error
-        private void ClientOnDataTransferProcCompleted(object sender, GetCountiesDataCompletedEventArgs getCountiesDataCompletedEventArgs)
+		private void ClientOnDataTransferProcCompleted(object sender, GetTownDataByCountyCompletedEventArgs getTownDataByCountyCompletedEventArgs)
         {
             string msg = null;
 
             if (getCountiesDataCompletedEventArgs.Error != null)
             {
-                msg = getCountiesDataCompletedEventArgs.Error.Message;
-                msg += getCountiesDataCompletedEventArgs.Error.InnerException;
+				msg = getTownDataByCountyCompletedEventArgs.Error.Message;
+				msg += getTownDataByCountyCompletedEventArgs.Error.InnerException;
                 RunOnUiThread(() => _getTownsTextView.Text = msg);
             }
-            else if (getCountiesDataCompletedEventArgs.Cancelled)
+			else if (getTownDataByCountyCompletedEventArgs.Cancelled)
             {
                 msg = "Request was cancelled.";
                 RunOnUiThread(() => _getTownsTextView.Text = msg);
             }
             else
             {
-                msg = getCountiesDataCompletedEventArgs.Result.ToString();
-                TestAndroid.Festivalwrapper testHolder = getCountiesDataCompletedEventArgs.Result;
-                List<string> holder = testHolder.CountyList.Select(item => item.Name).ToList();
+				msg = getTownDataByCountyCompletedEventArgs.Result.ToString();
+				TestAndroid.Festivalwrapper testHolder = getTownDataByCountyCompletedEventArgs.Result;
+				List<string> holder = testHolder.TownList.Select(item => item.Name).ToList();
 
                 /*foreach (TestAndroid.CountyVM item in TestHolder.CountyList)
 				{
