@@ -74,6 +74,7 @@
     <Compile Include="DataTransferProc.cs" />
     <Compile Include="FestivalActivity.cs" />
     <Compile Include="FestivalListActivity.cs" />
+    <Compile Include="FestivalListByTypeActivity.cs" />
     <Compile Include="SearchActivity.cs" />
     <Compile Include="SelectLocationActivity.cs" />
     <Compile Include="SplashActivity.cs" />

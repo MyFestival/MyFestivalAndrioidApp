@@ -2,36 +2,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using System.Text;
-
 using Android.App;
 using Android.Content;
-using Android.Content.PM;
-using Android.Locations;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
 namespace MyFestivalApp
 {
-	[Activity(Theme = "@style/Theme.AppCompat.Light")]
+	[Activity(Label = "Selected County", Theme = "@style/Theme.AppCompat.Light")]
     public class SelectLocationActivity : Activity
     {
 		private DataTransferProcClient _client;
         TextView _getTownsTextView;
         ListView _listView;
 		public static readonly EndpointAddress EndPoint = new EndpointAddress("http://10.0.2.2:3190/DataTransferProc.svc");
+	    //private int id;
 
         protected override void OnCreate(Bundle bundle)
         {
-			var name = Intent.GetStringExtra("Name");
-			var id = Intent.GetStringExtra ("position");
+            //var id = Intent.GetStringExtra("position");
 
 			base.OnCreate(bundle);
+			InitializeDataTownById();
 			SetContentView(Resource.Layout.selectLocation);
-			InitializeDataTownById(int id);
-
+			
             _listView = FindViewById<ListView>(Resource.Id.lvTowns);
             //_listView.OnItemClickListener = this;
             _listView.FastScrollEnabled = true;
@@ -40,13 +35,20 @@ namespace MyFestivalApp
         }
 
 		#region InitializeDataTown
-		private void InitializeDataTownById(int id)
+		private void InitializeDataTownById()
 		{
-			BasicHttpBinding binding = CreateBasicHttp();
-			_client = new DataTransferProcClient(binding, EndPoint);
-			_client.GetTownDataByCountyCompleted += ClientOnDataTransferProcCompleted;
-			_client.GetTownDataByCountyAsync();
-			//_client.Close ();
+			var id = Intent.GetStringExtra("Name");
+			int value;
+			int.TryParse(id, out value);
+
+			if (value != null)
+			{
+				BasicHttpBinding binding = CreateBasicHttp();
+				_client = new DataTransferProcClient(binding, EndPoint);
+				_client.GetTownDataByCountyCompleted += ClientOnDataTransferProcCompleted;
+				_client.GetTownDataByCountyAsync(value);
+			}
+		    //_client.Close ();
 		}
 		#endregion
 
@@ -79,7 +81,7 @@ namespace MyFestivalApp
         {
             string msg = null;
 
-            if (getCountiesDataCompletedEventArgs.Error != null)
+            if (getTownDataByCountyCompletedEventArgs.Error != null)
             {
 				msg = getTownDataByCountyCompletedEventArgs.Error.Message;
 				msg += getTownDataByCountyCompletedEventArgs.Error.InnerException;
@@ -105,5 +107,18 @@ namespace MyFestivalApp
             }
         }
         #endregion
+
+        #region OnItemClick
+        public void OnItemClick(AdapterView parent, View view, int position, long id)
+		{
+			var selectedValue = parent.GetItemIdAtPosition(position);
+			//InitializeDataTownById(int position);
+			var Intent = new Intent(this, typeof(FestivalListActivity));
+            // selectedValue should already be a string but...
+            Intent.PutExtra("Name", selectedValue.ToString());
+			StartActivity(Intent);
+        }
+        #endregion
+
     }
 }

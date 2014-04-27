@@ -8,7 +8,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvgetFestList" />
+        android:id="@+id/getFestList" />
     <ListView
         android:id="@+id/lvFestList"
         android:layout_width="fill_parent"

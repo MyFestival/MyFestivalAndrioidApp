@@ -3,51 +3,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
+
 using Android.App;
+using Android.Content;
 using Android.OS;
+using Android.Runtime;
+using Android.Views;
 using Android.Widget;
 
 namespace MyFestivalApp
 {
-	[Activity(Label = "List of Festivals", Theme = "@style/Theme.AppCompat.Light")]
-    public class FestivalListActivity : Activity
+	[Activity(Label = "Festivals with Selected Type", Theme = "@style/Theme.AppCompat.Light")]
+	public class FestivalListByTypeActivity : Activity
     {
-		private DataTransferProcClient _client;
-		TextView _getFestivalsTextView;
-		ListView _listView;
-		public static readonly EndpointAddress EndPoint = new EndpointAddress("http://10.0.2.2:3190/DataTransferProc.svc");
+        private DataTransferProcClient _client;
+        TextView _getFestivalsTextView;
+        ListView _listView;
+        public static readonly EndpointAddress EndPoint = new EndpointAddress("http://10.0.2.2:3190/DataTransferProc.svc");
 
-		#region OnCreate
+        #region OnCreate
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-			InitializeDataFestivalByTownId();
+            InitializeDataFestivalByTownId();
             // Load the UI defined in festival.axml
             SetContentView(Resource.Layout.festivallist);
 
-			_listView = FindViewById<ListView>(Resource.Id.lvFestList);
-			//_listView.OnItemClickListener = this;
-			_listView.FastScrollEnabled = true;
+            _listView = FindViewById<ListView>(Resource.Id.lvFestList);
+            //_listView.OnItemClickListener = this;
+            _listView.FastScrollEnabled = true;
 
-			_getFestivalsTextView = FindViewById<TextView>(Resource.Id.getFestList);
+            _getFestivalsTextView = FindViewById<TextView>(Resource.Id.getFestList);
         }
-		#endregion
+        #endregion
 
-		#region InitializeDataFestival
-		private void InitializeDataFestivalByTownId()
-		{
-			var id = Intent.GetStringExtra("Name");
-			int value;
-			int.TryParse(id, out value);
+        #region InitializeDataFestival
+        private void InitializeDataFestivalByTownId()
+        {
+            var id = Intent.GetStringExtra("Name");
+            int value;
+            int.TryParse(id, out value);
 
-			if (value != null) {
-				BasicHttpBinding binding = CreateBasicHttp();
-				_client = new DataTransferProcClient (binding, EndPoint);
-				_client.GetFestListDataByTownIdCompleted += ClientOnDataTransferProcCompleted;
-				_client.GetFestListDataByTownIdAsync(value);
-			}
-		}
-		#endregion
+            if (value != null)
+            {
+                BasicHttpBinding binding = CreateBasicHttp();
+                _client = new DataTransferProcClient(binding, EndPoint);
+                _client.GetFestListDataByTownIdCompleted += ClientOnDataTransferProcCompleted;
+                _client.GetFestListDataByTownIdAsync(value);
+            }
+        }
+        #endregion
 
         #region CreateBasicHttp
         private static BasicHttpBinding CreateBasicHttp()
@@ -102,6 +107,18 @@ namespace MyFestivalApp
 
                 RunOnUiThread(() => _listView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, holder));
             }
+        }
+        #endregion
+
+        #region OnItemClick
+        public void OnItemClick(AdapterView parent, View view, int position, long id)
+        {
+            var selectedValue = parent.GetItemIdAtPosition(position);
+            //InitializeDataTownById(int position);
+            var Intent = new Intent(this, typeof(FestivalListActivity));
+            // selectedValue should already be a string but...
+            Intent.PutExtra("Name", selectedValue.ToString());
+            StartActivity(Intent);
         }
         #endregion
     }

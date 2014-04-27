@@ -910,6 +910,9 @@ namespace MyFestivalApp
 			// aapt resource value: 0x7f050041
 			public const int getCountiesTextView = 2131034177;
 			
+			// aapt resource value: 0x7f05003f
+			public const int getFestList = 2131034175;
+			
 			// aapt resource value: 0x7f050047
 			public const int getTextView = 2131034183;
 			
@@ -1038,9 +1041,6 @@ namespace MyFestivalApp
 			
 			// aapt resource value: 0x7f050020
 			public const int top_action_bar = 2131034144;
-			
-			// aapt resource value: 0x7f05003f
-			public const int tvgetFestList = 2131034175;
 			
 			// aapt resource value: 0x7f050021
 			public const int up = 2131034145;

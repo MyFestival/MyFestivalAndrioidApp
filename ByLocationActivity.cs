@@ -117,7 +117,8 @@ namespace MyFestivalApp
 		}
         #endregion
 
-		public void OnItemClick(AdapterView parent, View view, int position, long id)
+        #region OnItemClick
+        public void OnItemClick(AdapterView parent, View view, int position, long id)
 		{
 			var selectedValue = parent.GetItemIdAtPosition(position);
 			//InitializeDataTownById(int position);
@@ -125,10 +126,11 @@ namespace MyFestivalApp
             // selectedValue should already be a string but...
             Intent.PutExtra("Name", selectedValue.ToString());
 			StartActivity(Intent);
-		}
-			
+        }
+        #endregion
+
         #region Search List
-		//public override bool OnCreateOptionsMenu(IMenu menu)
+        //public override bool OnCreateOptionsMenu(IMenu menu)
 		//{
 		//	MenuInflater.Inflate(Resource.Menu.search, menu);
 

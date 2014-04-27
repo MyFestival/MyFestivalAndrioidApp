@@ -4,6 +4,7 @@ using System.Net;
 using System.Reflection.Emit;
 using System.ServiceModel;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Support.V4.View;
 using Android.Support.V7.App;
@@ -114,5 +115,17 @@ namespace MyFestivalApp
 			}
 		}
 		#endregion
+
+        #region OnItemClick
+        public void OnItemClick(AdapterView parent, View view, int position, long id)
+        {
+            var selectedValue = parent.GetItemIdAtPosition(position);
+            //InitializeDataTownById(int position);
+            var Intent = new Intent(this, typeof(FestivalListByTypeActivity));
+            // selectedValue should already be a string but...
+            Intent.PutExtra("Name", selectedValue.ToString());
+            StartActivity(Intent);
+        }
+        #endregion
 	}
 }

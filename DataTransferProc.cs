@@ -635,9 +635,19 @@ public interface IDataTransferProc
 	TestAndroid.Festivalwrapper EndGetFesDataByType(System.IAsyncResult result);
 
 	[System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDataTransferProc/GetTownDataByCounty", ReplyAction="http://tempuri.org/IDataTransferProc/GetTownDataByCountyResponse")]
-	System.IAsyncResult BeginGetTownDataByCounty(int id, System.AsyncCallback callback, object asyncState);
+	System.IAsyncResult BeginGetTownDataByCounty(System.Nullable<int> id, System.AsyncCallback callback, object asyncState);
 
 	TestAndroid.Festivalwrapper EndGetTownDataByCounty(System.IAsyncResult result);
+
+	[System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDataTransferProc/GetFestListDataByTownId", ReplyAction="http://tempuri.org/IDataTransferProc/GetFestListDataByTownIdResponse")]
+	System.IAsyncResult BeginGetFestListDataByTownId(int id, System.AsyncCallback callback, object asyncState);
+
+	TestAndroid.Festivalwrapper EndGetFestListDataByTownId(System.IAsyncResult result);
+
+	[System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDataTransferProc/GetFestDetailsDataById", ReplyAction="http://tempuri.org/IDataTransferProc/GetFestDetailsDataByIdResponse")]
+	System.IAsyncResult BeginGetFestDetailsDataById(int id, System.AsyncCallback callback, object asyncState);
+
+	TestAndroid.Festivalwrapper EndGetFestDetailsDataById(System.IAsyncResult result);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -877,6 +887,52 @@ public partial class GetTownDataByCountyCompletedEventArgs : System.ComponentMod
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+public partial class GetFestListDataByTownIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+
+	private object[] results;
+
+	public GetFestListDataByTownIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+	base(exception, cancelled, userState)
+	{
+		this.results = results;
+	}
+
+	public TestAndroid.Festivalwrapper Result
+	{
+		get
+		{
+			base.RaiseExceptionIfNecessary();
+			return ((TestAndroid.Festivalwrapper)(this.results[0]));
+		}
+	}
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+public partial class GetFestDetailsDataByIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+
+	private object[] results;
+
+	public GetFestDetailsDataByIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+	base(exception, cancelled, userState)
+	{
+		this.results = results;
+	}
+
+	public TestAndroid.Festivalwrapper Result
+	{
+		get
+		{
+			base.RaiseExceptionIfNecessary();
+			return ((TestAndroid.Festivalwrapper)(this.results[0]));
+		}
+	}
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
 public partial class DataTransferProcClient : System.ServiceModel.ClientBase<IDataTransferProc>, IDataTransferProc
 {
 
@@ -939,6 +995,18 @@ public partial class DataTransferProcClient : System.ServiceModel.ClientBase<IDa
 	private EndOperationDelegate onEndGetTownDataByCountyDelegate;
 
 	private System.Threading.SendOrPostCallback onGetTownDataByCountyCompletedDelegate;
+
+	private BeginOperationDelegate onBeginGetFestListDataByTownIdDelegate;
+
+	private EndOperationDelegate onEndGetFestListDataByTownIdDelegate;
+
+	private System.Threading.SendOrPostCallback onGetFestListDataByTownIdCompletedDelegate;
+
+	private BeginOperationDelegate onBeginGetFestDetailsDataByIdDelegate;
+
+	private EndOperationDelegate onEndGetFestDetailsDataByIdDelegate;
+
+	private System.Threading.SendOrPostCallback onGetFestDetailsDataByIdCompletedDelegate;
 
 	private BeginOperationDelegate onBeginOpenDelegate;
 
@@ -1024,6 +1092,10 @@ public partial class DataTransferProcClient : System.ServiceModel.ClientBase<IDa
 	public event System.EventHandler<GetFesDataByTypeCompletedEventArgs> GetFesDataByTypeCompleted;
 
 	public event System.EventHandler<GetTownDataByCountyCompletedEventArgs> GetTownDataByCountyCompleted;
+
+	public event System.EventHandler<GetFestListDataByTownIdCompletedEventArgs> GetFestListDataByTownIdCompleted;
+
+	public event System.EventHandler<GetFestDetailsDataByIdCompletedEventArgs> GetFestDetailsDataByIdCompleted;
 
 	public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
 
@@ -1531,7 +1603,7 @@ public partial class DataTransferProcClient : System.ServiceModel.ClientBase<IDa
 	}
 
 	[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-	System.IAsyncResult IDataTransferProc.BeginGetTownDataByCounty(int id, System.AsyncCallback callback, object asyncState)
+	System.IAsyncResult IDataTransferProc.BeginGetTownDataByCounty(System.Nullable<int> id, System.AsyncCallback callback, object asyncState)
 	{
 		return base.Channel.BeginGetTownDataByCounty(id, callback, asyncState);
 	}
@@ -1544,7 +1616,7 @@ public partial class DataTransferProcClient : System.ServiceModel.ClientBase<IDa
 
 	private System.IAsyncResult OnBeginGetTownDataByCounty(object[] inValues, System.AsyncCallback callback, object asyncState)
 	{
-		int id = ((int)(inValues[0]));
+		System.Nullable<int> id = ((System.Nullable<int>)(inValues[0]));
 		return ((IDataTransferProc)(this)).BeginGetTownDataByCounty(id, callback, asyncState);
 	}
 
@@ -1564,12 +1636,12 @@ public partial class DataTransferProcClient : System.ServiceModel.ClientBase<IDa
 		}
 	}
 
-	public void GetTownDataByCountyAsync(int id)
+	public void GetTownDataByCountyAsync(System.Nullable<int> id)
 	{
 		this.GetTownDataByCountyAsync(id, null);
 	}
 
-	public void GetTownDataByCountyAsync(int id, object userState)
+	public void GetTownDataByCountyAsync(System.Nullable<int> id, object userState)
 	{
 		if ((this.onBeginGetTownDataByCountyDelegate == null))
 		{
@@ -1585,6 +1657,120 @@ public partial class DataTransferProcClient : System.ServiceModel.ClientBase<IDa
 		}
 		base.InvokeAsync(this.onBeginGetTownDataByCountyDelegate, new object[] {
 			id}, this.onEndGetTownDataByCountyDelegate, this.onGetTownDataByCountyCompletedDelegate, userState);
+	}
+
+	[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+	System.IAsyncResult IDataTransferProc.BeginGetFestListDataByTownId(int id, System.AsyncCallback callback, object asyncState)
+	{
+		return base.Channel.BeginGetFestListDataByTownId(id, callback, asyncState);
+	}
+
+	[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+	TestAndroid.Festivalwrapper IDataTransferProc.EndGetFestListDataByTownId(System.IAsyncResult result)
+	{
+		return base.Channel.EndGetFestListDataByTownId(result);
+	}
+
+	private System.IAsyncResult OnBeginGetFestListDataByTownId(object[] inValues, System.AsyncCallback callback, object asyncState)
+	{
+		int id = ((int)(inValues[0]));
+		return ((IDataTransferProc)(this)).BeginGetFestListDataByTownId(id, callback, asyncState);
+	}
+
+	private object[] OnEndGetFestListDataByTownId(System.IAsyncResult result)
+	{
+		TestAndroid.Festivalwrapper retVal = ((IDataTransferProc)(this)).EndGetFestListDataByTownId(result);
+		return new object[] {
+			retVal};
+	}
+
+	private void OnGetFestListDataByTownIdCompleted(object state)
+	{
+		if ((this.GetFestListDataByTownIdCompleted != null))
+		{
+			InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+			this.GetFestListDataByTownIdCompleted(this, new GetFestListDataByTownIdCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+		}
+	}
+
+	public void GetFestListDataByTownIdAsync(int id)
+	{
+		this.GetFestListDataByTownIdAsync(id, null);
+	}
+
+	public void GetFestListDataByTownIdAsync(int id, object userState)
+	{
+		if ((this.onBeginGetFestListDataByTownIdDelegate == null))
+		{
+			this.onBeginGetFestListDataByTownIdDelegate = new BeginOperationDelegate(this.OnBeginGetFestListDataByTownId);
+		}
+		if ((this.onEndGetFestListDataByTownIdDelegate == null))
+		{
+			this.onEndGetFestListDataByTownIdDelegate = new EndOperationDelegate(this.OnEndGetFestListDataByTownId);
+		}
+		if ((this.onGetFestListDataByTownIdCompletedDelegate == null))
+		{
+			this.onGetFestListDataByTownIdCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetFestListDataByTownIdCompleted);
+		}
+		base.InvokeAsync(this.onBeginGetFestListDataByTownIdDelegate, new object[] {
+			id}, this.onEndGetFestListDataByTownIdDelegate, this.onGetFestListDataByTownIdCompletedDelegate, userState);
+	}
+
+	[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+	System.IAsyncResult IDataTransferProc.BeginGetFestDetailsDataById(int id, System.AsyncCallback callback, object asyncState)
+	{
+		return base.Channel.BeginGetFestDetailsDataById(id, callback, asyncState);
+	}
+
+	[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+	TestAndroid.Festivalwrapper IDataTransferProc.EndGetFestDetailsDataById(System.IAsyncResult result)
+	{
+		return base.Channel.EndGetFestDetailsDataById(result);
+	}
+
+	private System.IAsyncResult OnBeginGetFestDetailsDataById(object[] inValues, System.AsyncCallback callback, object asyncState)
+	{
+		int id = ((int)(inValues[0]));
+		return ((IDataTransferProc)(this)).BeginGetFestDetailsDataById(id, callback, asyncState);
+	}
+
+	private object[] OnEndGetFestDetailsDataById(System.IAsyncResult result)
+	{
+		TestAndroid.Festivalwrapper retVal = ((IDataTransferProc)(this)).EndGetFestDetailsDataById(result);
+		return new object[] {
+			retVal};
+	}
+
+	private void OnGetFestDetailsDataByIdCompleted(object state)
+	{
+		if ((this.GetFestDetailsDataByIdCompleted != null))
+		{
+			InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+			this.GetFestDetailsDataByIdCompleted(this, new GetFestDetailsDataByIdCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+		}
+	}
+
+	public void GetFestDetailsDataByIdAsync(int id)
+	{
+		this.GetFestDetailsDataByIdAsync(id, null);
+	}
+
+	public void GetFestDetailsDataByIdAsync(int id, object userState)
+	{
+		if ((this.onBeginGetFestDetailsDataByIdDelegate == null))
+		{
+			this.onBeginGetFestDetailsDataByIdDelegate = new BeginOperationDelegate(this.OnBeginGetFestDetailsDataById);
+		}
+		if ((this.onEndGetFestDetailsDataByIdDelegate == null))
+		{
+			this.onEndGetFestDetailsDataByIdDelegate = new EndOperationDelegate(this.OnEndGetFestDetailsDataById);
+		}
+		if ((this.onGetFestDetailsDataByIdCompletedDelegate == null))
+		{
+			this.onGetFestDetailsDataByIdCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetFestDetailsDataByIdCompleted);
+		}
+		base.InvokeAsync(this.onBeginGetFestDetailsDataByIdDelegate, new object[] {
+			id}, this.onEndGetFestDetailsDataByIdDelegate, this.onGetFestDetailsDataByIdCompletedDelegate, userState);
 	}
 
 	private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState)
@@ -1813,7 +1999,7 @@ public partial class DataTransferProcClient : System.ServiceModel.ClientBase<IDa
 			return _result;
 		}
 
-		public System.IAsyncResult BeginGetTownDataByCounty(int id, System.AsyncCallback callback, object asyncState)
+		public System.IAsyncResult BeginGetTownDataByCounty(System.Nullable<int> id, System.AsyncCallback callback, object asyncState)
 		{
 			object[] _args = new object[1];
 			_args[0] = id;
@@ -1825,6 +2011,36 @@ public partial class DataTransferProcClient : System.ServiceModel.ClientBase<IDa
 		{
 			object[] _args = new object[0];
 			TestAndroid.Festivalwrapper _result = ((TestAndroid.Festivalwrapper)(base.EndInvoke("GetTownDataByCounty", _args, result)));
+			return _result;
+		}
+
+		public System.IAsyncResult BeginGetFestListDataByTownId(int id, System.AsyncCallback callback, object asyncState)
+		{
+			object[] _args = new object[1];
+			_args[0] = id;
+			System.IAsyncResult _result = base.BeginInvoke("GetFestListDataByTownId", _args, callback, asyncState);
+			return _result;
+		}
+
+		public TestAndroid.Festivalwrapper EndGetFestListDataByTownId(System.IAsyncResult result)
+		{
+			object[] _args = new object[0];
+			TestAndroid.Festivalwrapper _result = ((TestAndroid.Festivalwrapper)(base.EndInvoke("GetFestListDataByTownId", _args, result)));
+			return _result;
+		}
+
+		public System.IAsyncResult BeginGetFestDetailsDataById(int id, System.AsyncCallback callback, object asyncState)
+		{
+			object[] _args = new object[1];
+			_args[0] = id;
+			System.IAsyncResult _result = base.BeginInvoke("GetFestDetailsDataById", _args, callback, asyncState);
+			return _result;
+		}
+
+		public TestAndroid.Festivalwrapper EndGetFestDetailsDataById(System.IAsyncResult result)
+		{
+			object[] _args = new object[0];
+			TestAndroid.Festivalwrapper _result = ((TestAndroid.Festivalwrapper)(base.EndInvoke("GetFestDetailsDataById", _args, result)));
 			return _result;
 		}
 	}
