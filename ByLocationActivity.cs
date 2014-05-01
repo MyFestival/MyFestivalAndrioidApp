@@ -107,10 +107,28 @@ namespace MyFestivalApp
 				TestAndroid.Festivalwrapper testHolder = getCountiesDataCompletedEventArgs.Result;
 				List<string> holder = testHolder.CountyList.Select(item => item.Name).ToList();
 
-                /*foreach (TestAndroid.CountyVM item in TestHolder.CountyList)
+				/*List<string> holder = new List<string> ();
+				 * foreach (TestAndroid.CountyVM item in TestHolder.CountyList)
 				{
 					holder.Add (item.Name);
-				}*/
+				}
+				DataTable dt = testDs.Tables[0];
+
+            	foreach (DataRow row in dt.Rows)
+            	{
+                int i = 0;
+                foreach (DataColumn column in dt.Columns)
+                {
+                    try
+                    {
+                        i++;
+                        listView1.Items.Add(row[i].ToString());
+                    }
+                    catch
+                    {
+
+                    }
+                }*/
 
 				RunOnUiThread(() => _listView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, holder));
             }
